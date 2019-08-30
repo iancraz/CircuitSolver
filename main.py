@@ -1,49 +1,49 @@
 import CircuitSolver as cs
 import numpy as np
 import matplotlib.pyplot as plt
-from sympy import *
+import sympy as sy
+import math
 
 
 def main():
+    sy.init_printing()
+    a0 = sy.Symbol('a0',real = True, positive = True)
+    r1 = sy.Symbol('R1',real = True, positive = True)
+    r2 = sy.Symbol('R2',real = True, positive = True)
+    r3 = sy.Symbol('R3',real = True, positive = True)
+    r4 = sy.Symbol('R4',real = True, positive = True)
+    w = sy.Symbol('W',real = True, positive = True)
+    f = sy.Symbol('f',real = True, positive = True)
+    Vi = sy.Symbol('Vi',real = True, positive = True)
+    Vo = sy.Symbol('Vo',real = True, positive = True)
+    Vm = sy.Symbol('Vm',real = True, positive = True)
+    s = sy.Symbol('s') 
+    i1 = sy.Symbol('I1',real = True) 
+    i2 = sy.Symbol('I2',real = True) 
+    i3 = sy.Symbol('I3',real = True) 
+    i4 = sy.Symbol('I4',real = True) 
+    i5 = sy.Symbol('I5',real = True) 
+    Iinp = sy.Symbol('Iinp',real = True)
+    Iout = sy.Symbol('Iout',real = True)
+
+    
     test = cs.circuitSolver()
     equations = []
     Aw = a0/(1+s/w)
     
-    equations.append(((Vi-Vp)/r3)-Vp/r4)
-    equations.append((Vo-Vm)/r2-(Vm/r1))
-    equations.append(Vo - Aw*(Vp-Vm))
+    equations.append(Iinp-i2-i3)
+    equations.append((Vi-Vm)/r1 -Iinp)
+    equations.append(Vm/r3-i2)
+    equations.append(Vo- Aw*(-Vm))
+    equations.append((Vm-Vo)/r2 -i3)
+    equations.append(Iout-i3-i5)
+    equations.append(Vo/r4 - i5)
+    unknowns = [Vi,Vo,Iinp, Iout, Vm, i3, i5]
 
-    unknowns = [Vi,Vo,Vp]
     test.setEquations(equations)
     test.setUnknowns(unknowns)
-    test.solveCircuit()
-    H = test.getH()
-    inpCurr = (test.getUnknowns()[Vi]-test.getUnknowns()[Vp]) / r3
-    test.calcZinp(inpCurr)
-    unknowns = [Vi,Vo,Vm]
-    test.setUnknowns(unknowns)
-    test.solveCircuit()
-    outCurr = (test.getUnknowns()[Vo]-test.getUnknowns()[Vm]) / r2
-    test.calcZout(outCurr)
-    mod = simplify(sqrt(re(H)**2+im(H)**2))
-    mod = mod.subs(s,I*2*p*f)
-    print(latex(slewRate(H,SR,Vi,f)))
+    test.solveCircuit(Vi,Vo,Iinp,Iout)
+    test.changeToFreq()
+    print(test.getH())
 
-init_printing()
-a0 = Symbol('a0',real = True, positive = True)
-r1 = Symbol('R1',real = True, positive = True)
-r2 = Symbol('R2',real = True, positive = True)
-r3 = Symbol('R3',real = True, positive = True)
-r4 = Symbol('R4',real = True, positive = True)
-w = Symbol('W',real = True, positive = True)
-f = Symbol('f',real = True, positive = True)
-Vi = Symbol('Vi',real = True, positive = True)
-Vo = Symbol('Vo',real = True, positive = True)
-Vp = Symbol('Vp',real = True, positive = True)
-Vm = Symbol('Vm',real = True, positive = True)
-Vcc = Symbol('Vcc',real = True, positive = True)
-SR = Symbol('SR',real = True, positive = True)
-s = Symbol('s')
-p = Symbol('pi',real = True, positive = True) 
-#s = I*2*pi*f
 main()

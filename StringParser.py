@@ -5,6 +5,7 @@ class stringParser:
     def __init__(self):
         self.varList = []
         self.expressList = []
+        self.unkownsList = []
         return
     
     def getVarList(self):
@@ -18,6 +19,15 @@ class stringParser:
             if temp[i-1] not in self.varList:
                 self.varList.append(temp[i])
         return
+    
+    def setUnknowns(self,string):
+        temp = parse_expr(string,transformations=standard_transformations + (implicit_multiplication,))
+        a = list(temp.free_symbols)
+        self.unkownsList = a
+        return
+    
+    def getUnknowns(self):
+        return self.unkownsList
     
     def getExpressionList(self):
         return self.expressList

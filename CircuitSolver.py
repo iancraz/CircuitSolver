@@ -32,15 +32,14 @@ class circuitSolver:
         self.equations = equationsList
         return
 
-    def setUnknowns(self): ##Tienen que estar si o si Vi y Vo como unknowns
-        self.unknowns = []
-        #self.unknowns = unknownsList
+    def setUnknowns(self,unknownsList): ##Tienen que estar si o si Vi y Vo como unknowns
+        self.unknowns = unknownsList
         return
     
     def solveCircuit(self):
-        self.solution = sy.solve(self.equations,[self.Vo])
-        if self.solution[self.Vi] != None and self.solution[self.Vo] != None and self.solution[self.Iinp] != None:
-            self.update(self.Vi,self.Vo, self.Iinp)
+        self.solution = sy.solve(self.equations,self.unknowns)
+        if len(self.solution) != 0:
+            self.update(self.Vi,self.Vo,self.Iinp)
         return
 
     def getH(self):

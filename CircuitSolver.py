@@ -32,14 +32,15 @@ class circuitSolver:
         self.equations = equationsList
         return
 
-    def setUnknowns(self,unknownsList): ##Tienen que estar si o si Vi y Vo como unknowns
-        self.unknowns = unknownsList
+    def setUnknowns(self): ##Tienen que estar si o si Vi y Vo como unknowns
+        self.unknowns = []
+        #self.unknowns = unknownsList
         return
     
-    def solveCircuit(self, Vi,Vo, Iinp, Iout):
-        self.solution = sy.solve(self.equations,self.unknowns)
-        if self.solution[Vi] != None and self.solution[Vo] != None and self.solution[Iinp] != None and self.solution[Iout] != None:
-            self.update(Vi,Vo, Iinp, Iout)
+    def solveCircuit(self):
+        self.solution = sy.solve(self.equations,[self.Vo])
+        if self.solution[self.Vi] != None and self.solution[self.Vo] != None and self.solution[self.Iinp] != None:
+            self.update(self.Vi,self.Vo, self.Iinp)
         return
 
     def getH(self):
@@ -59,7 +60,6 @@ class circuitSolver:
         return self.zinp
         
     def calcZout(self,outCurr):
-
         self.zout = sy.simplify(self.solution[self.Vo]/outCurr)
         return self.zout
     
@@ -78,15 +78,13 @@ class circuitSolver:
         self.solution = None
         return
     
-    def update(self,Vi,Vo, Iinp, Iout):
+    def update(self,Vi,Vo, Iinp):
         self.H = self.solution[Vo]/self.solution[Vi]
         self.H = sy.simplify(self.H)
         self.mod = sy.simplify(sy.sqrt(sy.re(self.H)**2+sy.im(self.H)**2))
         self.phase = sy.simplify(sy.tan(sy.im(self.H)/sy.re(self.H))*180/3.14195)
         self.zinp = self.solution[Vi]/self.solution[Iinp]
-        self.zout = self.solution[Vo]/self.solution[Iout]
         self.zinp = sy.simplify(self.zinp)
-        self.zout = sy.simplify(self.zout)
         return
 
     def changeToFreq(self):

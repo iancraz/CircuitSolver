@@ -5,9 +5,16 @@ import matplotlib.pyplot as plt
 import sympy as sy
 import tkinter as tk
 
+from PyQt5 import QtWidgets, uic
+import sys
+app = QtWidgets.QApplication([])
+win = uic.loadUi("untitled.ui") #specify the location of your .ui file
+win.show()
+sys.exit(app.exec())
 
 def main():
-    sy.init_printing()
+
+    """ sy.init_printing()
     stringParser = sp.stringParser()
     circuit = cs.circuitSolver()
     expressionList = []
@@ -30,7 +37,7 @@ def main():
     unknowns.grid(column=4, row=1)
     btn3 = tk.Button(window, text="Set Unknowns", command=lambda : parseUnk(stringParser,unknowns.get()))
     btn3.grid(column=4, row=2)
-    window.mainloop()
+    window.mainloop() """
 
 def clicked(string,stParser, express, labelList):
     stParser.decode(string)

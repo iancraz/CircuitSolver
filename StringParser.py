@@ -31,3 +31,8 @@ class stringParser:
     
     def getExpressionList(self):
         return self.expressList
+
+    def reset(self):
+        self.varList = []
+        self.expressList = []
+        self.unkownsList = []

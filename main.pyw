@@ -61,15 +61,25 @@ class Logic(baseUIWidget, baseUIClass):
                 else:
                     self.showTransferFunction(True)
             if self.zInpChkBox.checkState():
-                if self.prettyViewButton.checkState():
+                if self.prettyViewButton.isChecked():
                     self.showZInputFunction(False)
                 else:
                     self.showZInputFunction(True)
             if self.zOutChkBox.checkState():
-                if self.prettyViewButton.checkState():
+                if self.prettyViewButton.isChecked():
                     self.showZOutputFunction(False)
                 else:
                     self.showZOutputFunction(True)
+            if self.modPhaseChkBox.checkState():
+                if self.prettyViewButton.isChecked():
+                    self.showModPhaseFunction(False,True)
+                else:
+                    self.showModPhaseFunction(True,True)
+            else:
+                if self.prettyViewButton.isChecked():
+                    self.showModPhaseFunction(False,False)
+                else:
+                    self.showModPhaseFunction(True,False)
             
         return
 
@@ -113,6 +123,25 @@ class Logic(baseUIWidget, baseUIClass):
             temp = temp.replace('\n','<br/>')
         _translate = QtCore.QCoreApplication.translate
         self.zOutResultTextEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+        "p, li { white-space: pre-wrap; }\n"
+        "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"+temp+"</p>\n"
+        "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        return
+
+    def showModPhaseFunction(self,isLatex, isMod):
+        if isMod:
+            temp = self.circuitSolver.getMod()
+        else:
+            temp = self.circuitSolver.getPhase()
+        if isLatex:
+            temp = sy.latex(temp)
+        else:
+            temp = sy.pretty(temp)
+            temp = temp.replace('\n','<br/>')
+        _translate = QtCore.QCoreApplication.translate
+        self.modPhaseResultTextEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
         "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
         "p, li { white-space: pre-wrap; }\n"
         "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"

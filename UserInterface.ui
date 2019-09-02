@@ -733,7 +733,7 @@ p, li { white-space: pre-wrap; }
      <string>by Ian Diaz 2019</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox">
+   <widget class="QCheckBox" name="modPhaseChkBox">
     <property name="geometry">
      <rect>
       <x>250</x>

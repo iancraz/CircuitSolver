@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>848</width>
+    <width>969</width>
     <height>389</height>
    </rect>
   </property>
@@ -165,7 +165,7 @@
    <widget class="QLabel" name="mainLabel_unk">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>210</x>
       <y>10</y>
       <width>151</width>
       <height>21</height>
@@ -183,7 +183,7 @@
    <widget class="Line" name="line_2">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>220</x>
       <y>40</y>
       <width>118</width>
       <height>3</height>
@@ -196,7 +196,7 @@
    <widget class="QLineEdit" name="unkCreator">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>220</x>
       <y>60</y>
       <width>113</width>
       <height>20</height>
@@ -206,7 +206,7 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>220</x>
       <y>140</y>
       <width>71</width>
       <height>16</height>
@@ -224,7 +224,7 @@
    <widget class="Line" name="line_3">
     <property name="geometry">
      <rect>
-      <x>400</x>
+      <x>530</x>
       <y>20</y>
       <width>16</width>
       <height>301</height>
@@ -237,7 +237,7 @@
    <widget class="QCheckBox" name="transferenceChkBox">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>220</x>
       <y>160</y>
       <width>111</width>
       <height>17</height>
@@ -253,8 +253,8 @@
    <widget class="QCheckBox" name="zInpChkBox">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>210</y>
+      <x>220</x>
+      <y>200</y>
       <width>70</width>
       <height>17</height>
      </rect>
@@ -266,8 +266,8 @@
    <widget class="QCheckBox" name="zOutChkBox">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>235</y>
+      <x>220</x>
+      <y>220</y>
       <width>70</width>
       <height>17</height>
      </rect>
@@ -279,10 +279,10 @@
    <widget class="QPushButton" name="goButton">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>290</y>
-      <width>75</width>
-      <height>23</height>
+      <x>380</x>
+      <y>230</y>
+      <width>141</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
@@ -292,8 +292,8 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>270</y>
+      <x>220</x>
+      <y>240</y>
       <width>101</width>
       <height>21</height>
      </rect>
@@ -310,8 +310,8 @@
    <widget class="QRadioButton" name="prettyViewButton">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>300</y>
+      <x>220</x>
+      <y>270</y>
       <width>82</width>
       <height>17</height>
      </rect>
@@ -332,8 +332,8 @@
    <widget class="QRadioButton" name="latexButton">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>320</y>
+      <x>220</x>
+      <y>290</y>
       <width>82</width>
       <height>17</height>
      </rect>
@@ -345,7 +345,7 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>580</x>
+      <x>760</x>
       <y>10</y>
       <width>71</width>
       <height>16</height>
@@ -367,7 +367,7 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>560</x>
       <y>30</y>
       <width>101</width>
       <height>16</height>
@@ -386,7 +386,7 @@
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>560</x>
       <y>170</y>
       <width>101</width>
       <height>16</height>
@@ -405,7 +405,7 @@
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>560</x>
       <y>240</y>
       <width>101</width>
       <height>16</height>
@@ -424,7 +424,7 @@
    <widget class="QTextEdit" name="transferenceResultTextEdit">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>560</x>
       <y>50</y>
       <width>401</width>
       <height>51</height>
@@ -441,7 +441,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextEdit" name="zInpResultTextEdit">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>560</x>
       <y>190</y>
       <width>401</width>
       <height>51</height>
@@ -459,7 +459,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextEdit" name="zOutResultTextEdit">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>560</x>
       <y>260</y>
       <width>401</width>
       <height>51</height>
@@ -524,43 +524,30 @@ p, li { white-space: pre-wrap; }
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="setEqButton">
+   <widget class="QPushButton" name="setConfigurationsButton">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>220</y>
+      <x>220</x>
+      <y>100</y>
       <width>111</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Set Equations</string>
+     <string>Set Configurations</string>
     </property>
    </widget>
    <widget class="QPushButton" name="clearAllButton">
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>320</y>
+      <y>300</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
      <string>Clear All</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="setUnknownsButton">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>100</y>
-      <width>91</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Set Unknowns</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
@@ -674,7 +661,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextEdit" name="modPhaseResultTextEdit">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>560</x>
       <y>120</y>
       <width>401</width>
       <height>51</height>
@@ -691,7 +678,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="label_13">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>560</x>
       <y>100</y>
       <width>131</width>
       <height>16</height>
@@ -710,7 +697,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="plotButton">
     <property name="geometry">
      <rect>
-      <x>540</x>
+      <x>690</x>
       <y>320</y>
       <width>151</width>
       <height>23</height>
@@ -723,7 +710,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="label_14">
     <property name="geometry">
      <rect>
-      <x>750</x>
+      <x>870</x>
       <y>320</y>
       <width>111</width>
       <height>20</height>
@@ -736,8 +723,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QCheckBox" name="modPhaseChkBox">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>185</y>
+      <x>220</x>
+      <y>180</y>
       <width>70</width>
       <height>17</height>
      </rect>
@@ -749,13 +736,82 @@ p, li { white-space: pre-wrap; }
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QLineEdit" name="imaginaryVariablesLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>40</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_15">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>10</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Imaginary Variables:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_16">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>70</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Real Variables:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="realVariablesLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>100</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_17">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>140</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Real Positive variables:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="realPosVariablesLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>170</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>848</width>
+     <width>969</width>
      <height>21</height>
     </rect>
    </property>

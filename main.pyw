@@ -10,6 +10,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import StringParser as sp
 import CircuitSolver as cs
+import sympy as sy
 
 
 class Ui_MainWindow(object):
@@ -25,6 +26,50 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.mainLabel_eq.setFont(font)
         self.mainLabel_eq.setObjectName("mainLabel_eq")
+
+        self.equal0_1 = QtWidgets.QLabel(self.centralwidget)
+        self.equal0_1.setGeometry(QtCore.QRect(160, 60, 51, 16))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.equal0_1.setFont(font)
+        self.equal0_1.setObjectName("equal0_1")
+        
+        self.equal0_2 = QtWidgets.QLabel(self.centralwidget)
+        self.equal0_2.setGeometry(QtCore.QRect(160, 85, 51, 16))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.equal0_2.setFont(font)
+        self.equal0_2.setObjectName("equal0_2")
+        
+        self.equal0_3 = QtWidgets.QLabel(self.centralwidget)
+        self.equal0_3.setGeometry(QtCore.QRect(160, 110, 51, 16))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.equal0_3.setFont(font)
+        self.equal0_3.setObjectName("equal0_3")
+
+        self.equal0_4 = QtWidgets.QLabel(self.centralwidget)
+        self.equal0_4.setGeometry(QtCore.QRect(160, 135, 51, 16))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.equal0_4.setFont(font)
+        self.equal0_4.setObjectName("equal0_4")
+
+        self.equal0_5 = QtWidgets.QLabel(self.centralwidget)
+        self.equal0_5.setGeometry(QtCore.QRect(160, 160, 51, 16))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.equal0_5.setFont(font)
+        self.equal0_5.setObjectName("equal0_5")
+
+        self.equal0_6 = QtWidgets.QLabel(self.centralwidget)
+        self.equal0_6.setGeometry(QtCore.QRect(160, 185, 51, 16))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.equal0_6.setFont(font)
+        self.equal0_6.setObjectName("equal0_6")
+
+
         self.lblStatus_1 = QtWidgets.QLabel(self.centralwidget)
         self.lblStatus_1.setGeometry(QtCore.QRect(50, 260, 51, 21))
         font = QtGui.QFont()
@@ -193,7 +238,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
+        
+        sy.init_printing()
         self.circuitSolver = cs.circuitSolver()
         self.stringParser = sp.stringParser()
 
@@ -201,10 +247,12 @@ class Ui_MainWindow(object):
         self.clearAllButton.clicked.connect(self.clearAll)
         self.setUnknownsButton.clicked.connect(self.setUnknowns)
         self.goButton.clicked.connect(self.resolve)
+        self.eqCreatorsList = [self.eqCreator_1,self.eqCreator_2,self.eqCreator_3,self.eqCreator_4,self.eqCreator_5,self.eqCreator_6]
 
     def setEquations(self):
+        self.stringParser.eraseEq()
         for i in range(0,5):
-            temp = self.eqCreator_1.text()
+            temp = self.eqCreatorsList[i].text()
             if(temp != ""):
                 self.stringParser.decode(temp)
         if len(self.stringParser.getExpressionList()) == 0:
@@ -220,6 +268,7 @@ class Ui_MainWindow(object):
         return
 
     def setUnknowns(self):
+        self.stringParser.eraseUnk()
         temp = self.unkCreator.text()
         if(temp != ""):
             self.stringParser.setUnknowns(temp)
@@ -233,12 +282,70 @@ class Ui_MainWindow(object):
             self.circuitSolver.setEquations(self.stringParser.getExpressionList())
             self.circuitSolver.setUnknowns(self.stringParser.getUnknowns())
             self.circuitSolver.solveCircuit()
+            if self.transferenceChkBox.checkState():
+                if self.prettyViewButton.isChecked():
+                    self.showTransferFunction(False)
+                else:
+                    self.showTransferFunction(True)
+            if self.zInpChkBox.checkState():
+                if self.prettyViewButton.checkState():
+                    self.showZInputFunction(False)
+                else:
+                    self.showZInputFunction(True)
+            if self.zOutChkBox.checkState():
+                if self.prettyViewButton.checkState():
+                    self.showZOutputFunction(False)
+                else:
+                    self.showZOutputFunction(True)
+            
         return
 
+    def showTransferFunction(self, isLatex):
+        temp = self.circuitSolver.getH()
+        if isLatex:
+            temp = sy.latex(temp)
+        else:
+            temp = sy.pretty(temp)
+            temp = temp.replace('\n','<br/>')
+        _translate = QtCore.QCoreApplication.translate
+        self.transferenceResultTextEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+        "p, li { white-space: pre-wrap; }\n"
+        "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"+ temp +"</p></body></html>"))
+        return
 
+    def showZInputFunction(self, isLatex):
+        temp = self.circuitSolver.getZinp()
+        if isLatex:
+            temp = sy.latex(temp)
+        else:
+            temp = sy.pretty(temp)
+            temp = temp.replace('\n','<br/>')
+        _translate = QtCore.QCoreApplication.translate
+        self.zInpResultTextEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+        "p, li { white-space: pre-wrap; }\n"
+        "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"+temp+"</p>\n"
+        "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        return
 
-
-
+    def showZOutputFunction(self, isLatex):
+        temp = self.circuitSolver.getZout()
+        if isLatex:
+            temp = sy.latex(temp)
+        else:
+            temp = sy.pretty(temp)
+            temp = temp.replace('\n','<br/>')
+        _translate = QtCore.QCoreApplication.translate
+        self.zOutResultTextEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+        "p, li { white-space: pre-wrap; }\n"
+        "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"+temp+"</p>\n"
+        "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        return
 
 
 
@@ -246,6 +353,14 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Circuit Solver 1.0"))
         self.mainLabel_eq.setText(_translate("MainWindow", "Please, set the equations"))
+
+        self.equal0_1.setText(_translate("MainWindow", "= 0"))
+        self.equal0_2.setText(_translate("MainWindow", "= 0"))
+        self.equal0_3.setText(_translate("MainWindow", "= 0"))
+        self.equal0_4.setText(_translate("MainWindow", "= 0"))
+        self.equal0_5.setText(_translate("MainWindow", "= 0"))
+        self.equal0_6.setText(_translate("MainWindow", "= 0"))
+
         self.lblStatus_1.setText(_translate("MainWindow", "Status "))
         self.lblStatus.setText(_translate("MainWindow", "OK"))
         self.mainLabel_unk.setText(_translate("MainWindow", "Please, set the unknowns"))
@@ -262,22 +377,22 @@ class Ui_MainWindow(object):
         self.label_7.setText(_translate("MainWindow", "Z input:"))
         self.label_9.setText(_translate("MainWindow", "Z output:"))
         self.transferenceResultTextEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Transference Result</p></body></html>"))
+        "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+        "p, li { white-space: pre-wrap; }\n"
+        "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Transference Result</p></body></html>"))
         self.zInpResultTextEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Z input Result</p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+        "p, li { white-space: pre-wrap; }\n"
+        "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Z input Result</p>\n"
+        "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.zOutResultTextEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Z output Result</p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+        "p, li { white-space: pre-wrap; }\n"
+        "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Z output Result</p>\n"
+        "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.setEqButton.setText(_translate("MainWindow", "Set Equations"))
         self.clearAllButton.setText(_translate("MainWindow", "Clear All"))
         self.setUnknownsButton.setText(_translate("MainWindow", "Set Unknowns"))

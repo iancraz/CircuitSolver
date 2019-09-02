@@ -16,14 +16,16 @@ class stringParser:
         temp = len(self.expressList)
         temp = list(self.expressList[temp-1].free_symbols)
         for i in range(0,len(temp)):
-            if temp[i-1] not in self.varList:
+            if temp[i] not in self.varList:
                 self.varList.append(temp[i])
         return
     
     def setUnknowns(self,string):
-        temp = parse_expr(string,transformations=standard_transformations + (implicit_multiplication,))
-        a = list(temp.free_symbols)
-        self.unkownsList = a
+        self.unkownsList = []
+        temp = string.split(',')
+        for i in range(0,len(temp)):
+            temp1 = parse_expr(temp[i],transformations=standard_transformations + (implicit_multiplication,))
+            self.unkownsList.append(list(temp1.free_symbols)[0])
         return
     
     def getUnknowns(self):
@@ -36,3 +38,12 @@ class stringParser:
         self.varList = []
         self.expressList = []
         self.unkownsList = []
+        return
+
+    def eraseEq(self):
+        self.expressList = []
+        return
+
+    def eraseUnk(self):
+        self.unkownsList = []
+        return

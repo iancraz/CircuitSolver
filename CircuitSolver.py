@@ -32,14 +32,14 @@ class circuitSolver:
         self.equations = equationsList
         return
 
-    def setUnknowns(self,unknownsList): ##Tienen que estar si o si Vi y Vo como unknowns
+    def setUnknowns(self,unknownsList): ##Tienen que estar si o si Vi 1ro y Vo 2do como unknowns
         self.unknowns = unknownsList
         return
     
     def solveCircuit(self):
         self.solution = sy.solve(self.equations,self.unknowns)
         if len(self.solution) != 0:
-            self.update(self.Vi,self.Vo,self.Iinp)
+            self.update(self.unknowns[0],self.unknowns[1],self.Iinp)
         return
 
     def getH(self):
@@ -82,8 +82,8 @@ class circuitSolver:
         self.H = sy.simplify(self.H)
         self.mod = sy.simplify(sy.sqrt(sy.re(self.H)**2+sy.im(self.H)**2))
         self.phase = sy.simplify(sy.tan(sy.im(self.H)/sy.re(self.H))*180/3.14195)
-        self.zinp = self.solution[Vi]/self.solution[Iinp]
-        self.zinp = sy.simplify(self.zinp)
+        #self.zinp = self.solution[Vi]/self.solution[Iinp]
+        #self.zinp = sy.simplify(self.zinp)
         return
 
     def changeToFreq(self):

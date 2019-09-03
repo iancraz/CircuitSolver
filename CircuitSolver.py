@@ -78,7 +78,9 @@ class circuitSolver:
         return
     
     def update(self):
-        self.H = self.solution[0]/self.solution[1]
+
+        temp = self.solution[0]
+        self.H = temp[0]/temp[1]
         self.H = sy.simplify(self.H)
         self.mod = sy.simplify(sy.sqrt(sy.re(self.H)**2+sy.im(self.H)**2))
         self.phase = sy.simplify(sy.tan(sy.im(self.H)/sy.re(self.H))*180/3.14195)

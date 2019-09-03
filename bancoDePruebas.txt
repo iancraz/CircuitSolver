@@ -1,0 +1,16 @@
+banco de pruebas
+prueba 1
+
+eq:
+(vi-vm)/ri - (vm-vx)/r1
+(vm-vx)/r1 - vx/r2 - (vx-vo)/r3
+vo + A vm
+A - ao/(1+s/w)
+s -I*2*pi*f
+
+unk:
+im:
+A,s,I
+
+re:
+vi,vo,vx,vm,r1,r2,r3,ri,ao,w,pi,f

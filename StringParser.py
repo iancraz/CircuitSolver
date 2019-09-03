@@ -24,8 +24,8 @@ class stringParser:
                     temp2 = self.varList[u]
                     temp2 = temp2[1]
                     self.expressList[len(self.expressList)-1] = self.expressList[len(self.expressList)-1].subs(temp[i],temp2)
-                elif u == (len(self.varList)-1):
-                    self.varList.append(temp[i])
+                """ elif u == (len(self.varList)-1):
+                    self.varList.append([str(temp[i]),temp[i]]) """
         return
     
     def setUnknowns(self,string): ##HAY UN PROBLEMA POR ACA

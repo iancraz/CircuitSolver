@@ -20,6 +20,9 @@ class Logic(baseUIWidget, baseUIClass):
         self.clearAllButton.clicked.connect(self.clearAll)
         self.goButton.clicked.connect(self.resolve)
         self.eqCreatorsList = [self.eqCreator_1,self.eqCreator_2,self.eqCreator_3,self.eqCreator_4,self.eqCreator_5,self.eqCreator_6]
+        self.addButton.clicked.connect(self.addEquation)
+        self.clearAll()
+
 
     def setConfigurations(self):
         self.stringParser.eraseEq()
@@ -43,12 +46,16 @@ class Logic(baseUIWidget, baseUIClass):
         else:
             self.lblStatus.setText("ERROR")
         
+        self.numVarLabel.setText(str(len(self.stringParser.getVarList())))
+        
         for i in range(0,len(self.eqCreatorsList)):
             temp = self.eqCreatorsList[i].text()
             if(temp != ""):
                 self.stringParser.decode(temp)
+            self.numEqLabel.setText(str(len(self.stringParser.getExpressionList())))
         if len(self.stringParser.getExpressionList()) == 0:
             self.lblStatus.setText("ERROR")
+            self.numEqLabel.setText('0')
         
         temp = self.unkCreator.text()
         if temp != '':
@@ -64,6 +71,8 @@ class Logic(baseUIWidget, baseUIClass):
         self.stringParser.reset()
         self.circuitSolver.reset()
         self.lblStatus.setText("ERROR")
+        self.numEqLabel.setText('0')
+        self.numVarLabel.setText('0')
         return
 
     def resolve(self):
@@ -164,6 +173,14 @@ class Logic(baseUIWidget, baseUIClass):
         "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"+temp+"</p>\n"
         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        return
+
+    def addEquation(self):
+        temp = self.extraEquationsLineEdit.text()
+        if temp != '':
+            self.stringParser.decode(temp)
+            self.numEqLabel.setText(str(len(self.stringParser.getExpressionList())))
+        self.extraEquationsLineEdit.setText('')
         return
 
 

@@ -39,7 +39,7 @@ class circuitSolver:
     def solveCircuit(self):
         self.solution = sy.solve(self.equations,self.unknowns)
         if len(self.solution) != 0:
-            self.update(self.unknowns[0],self.unknowns[1],self.Iinp)
+            self.update()
         return
 
     def getH(self):
@@ -77,8 +77,8 @@ class circuitSolver:
         self.solution = None
         return
     
-    def update(self,Vi,Vo, Iinp):
-        self.H = self.solution[Vo]/self.solution[Vi]
+    def update(self):
+        self.H = self.solution[0]/self.solution[1]
         self.H = sy.simplify(self.H)
         self.mod = sy.simplify(sy.sqrt(sy.re(self.H)**2+sy.im(self.H)**2))
         self.phase = sy.simplify(sy.tan(sy.im(self.H)/sy.re(self.H))*180/3.14195)

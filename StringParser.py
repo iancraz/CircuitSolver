@@ -18,14 +18,12 @@ class stringParser:
         temp = list(self.expressList[temp-1].free_symbols)
         for i in range(0,len(temp)):
             for u in range(0,len(self.varList)):
-                if temp[i] == self.varList[u][0].free_symbols:
-                    self.expressList[len(self.expressList)-1].replace(temp[i],self.varList[u][1])
-
-
-                    ##DEJE ACAAA
-        for i in range(0,len(temp)):
-            if temp[i] not in self.varList:
-                self.varList.append(temp[i])
+                temp2 = self.varList[u]
+                temp2 = temp2[0]
+                if str(temp[i]) == temp2:
+                    temp2 = self.varList[u]
+                    temp2 = temp2[1]
+                    self.expressList[len(self.expressList)-1] = self.expressList[len(self.expressList)-1].subs(temp[i],temp2)
         return
     
     def setUnknowns(self,string):
@@ -33,7 +31,12 @@ class stringParser:
         temp = string.split(',')
         for i in range(0,len(temp)):
             temp1 = parse_expr(temp[i],transformations=standard_transformations + (implicit_multiplication,))
-            self.unkownsList.append(list(temp1.free_symbols)[0])
+            temp1 = list(temp1.free_symbols)[0]
+            for u in range(0,len(self.varList)):
+                temp2 = self.varList[u]
+                if str(temp1) == temp2[0]:
+                    self.unkownsList.append(temp2[1])
+        
         return
     
     def getUnknowns(self):
@@ -59,7 +62,7 @@ class stringParser:
     def setImaginaryVariables(self,string):
         temp = string.split(',')
         for i in range(0,len(temp)):
-            self.varList.append([temp[i],sy.Symbol(temp[i],complex = True)])
+            self.varList.append([temp[i],sy.Symbol(temp[i])])
         return
     
     def setRealVariables(self,string,isPositive):
@@ -68,7 +71,7 @@ class stringParser:
             if isPositive:
                 self.varList.append([temp[i],sy.Symbol(temp[i],real = True, positive = True)])
             else:
-                self.unkownsList.append([temp[i],sy.Symbol(temp[i],real = True)])
+                self.varList.append([temp[i],sy.Symbol(temp[i],real = True)])
         return
 
     def eraseVariables(self):

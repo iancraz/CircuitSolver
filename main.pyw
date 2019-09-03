@@ -27,39 +27,37 @@ class Logic(baseUIWidget, baseUIClass):
         self.stringParser.eraseVariables()
 
         temp = self.imaginaryVariablesLineEdit.text()
-        self.stringParser.setImaginaryVariables(temp)
-
+        if temp != '':
+            self.stringParser.setImaginaryVariables(temp)
+        else:
+            self.lblStatus.setText("ERROR")
         temp = self.realVariablesLineEdit.text()
-        self.stringParser.setRealVariables(temp,False)
+        if temp != '':
+            self.stringParser.setRealVariables(temp,False)
+        else:
+            self.lblStatus.setText("ERROR")
 
         temp = self.realPosVariablesLineEdit.text()
-        self.stringParser.setRealVariables(temp,True)
-
-        if len(self.stringParser.getVarList()) == 0:
-            self.lblStatus.setText("ERROR")
-        
-        for i in range(0,5):
-            temp = self.eqCreatorsList[i].text()
-            if(temp != ""):
-                self.stringParser.decode(temp)
-        if len(self.stringParser.getExpressionList()) == 0:
-            self.lblStatus.setText("ERROR")
-        
-        """ self.stringParser.eraseEq()
-        for i in range(0,5):
-            temp = self.eqCreatorsList[i].text()
-            if(temp != ""):
-                self.stringParser.decode(temp)
-        if len(self.stringParser.getExpressionList()) == 0:
-            self.lblStatus.setText("ERROR")
+        if temp != '':
+            self.stringParser.setRealVariables(temp,True)
         else:
-            self.lblStatus.setText("OK")
-        self.stringParser.eraseUnk()
+            self.lblStatus.setText("ERROR")
+        
+        for i in range(0,len(self.eqCreatorsList)):
+            temp = self.eqCreatorsList[i].text()
+            if(temp != ""):
+                self.stringParser.decode(temp)
+        if len(self.stringParser.getExpressionList()) == 0:
+            self.lblStatus.setText("ERROR")
+        
         temp = self.unkCreator.text()
-        if(temp != ""):
+        if temp != '':
             self.stringParser.setUnknowns(temp)
         else:
-            self.lblStatus.setText("ERROR") """
+            self.lblStatus.setText("ERROR")
+
+        if len(self.stringParser.getVarList()) != 0 and len(self.stringParser.getUnknowns()) != 0 and len(self.stringParser.getExpressionList()) != 0:
+            self.lblStatus.setText("OK")
         return
     
     def clearAll(self):

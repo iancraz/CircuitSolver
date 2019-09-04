@@ -32,21 +32,14 @@ class Logic(baseUIWidget, baseUIClass):
         temp = self.imaginaryVariablesLineEdit.text()
         if temp != '':
             self.stringParser.setImaginaryVariables(temp)
-        else:
-            self.lblStatus.setText("ERROR")
         temp = self.realVariablesLineEdit.text()
         if temp != '':
             self.stringParser.setRealVariables(temp,False)
-        else:
-            self.lblStatus.setText("ERROR")
 
         temp = self.realPosVariablesLineEdit.text()
         if temp != '':
             self.stringParser.setRealVariables(temp,True)
-        else:
-            self.lblStatus.setText("ERROR")
         
-        self.numVarLabel.setText(str(len(self.stringParser.getVarList())))
         
         for i in range(0,len(self.eqCreatorsList)):
             temp = self.eqCreatorsList[i].text()
@@ -56,6 +49,7 @@ class Logic(baseUIWidget, baseUIClass):
         if len(self.stringParser.getExpressionList()) == 0:
             self.lblStatus.setText("ERROR")
             self.numEqLabel.setText('0')
+        self.numVarLabel.setText(str(len(self.stringParser.getVarList())))
         
         temp = self.unkCreator.text()
         if temp != '':
@@ -63,7 +57,7 @@ class Logic(baseUIWidget, baseUIClass):
         else:
             self.lblStatus.setText("ERROR")
 
-        if len(self.stringParser.getVarList()) != 0 and len(self.stringParser.getUnknowns()) != 0 and len(self.stringParser.getExpressionList()) != 0:
+        if self.numEqLabel.text() != '0' and len(self.stringParser.getUnknowns()) != 0 and len(self.stringParser.getExpressionList()) != 0:
             self.lblStatus.setText("OK")
         return
     

@@ -28,6 +28,8 @@ class stringParser:
                     check = True
                 elif u == (len(self.varList)-1) and check == False:
                     self.varList.append([str(temp[i]),temp[i]])
+            if len(self.varList) == 0:
+                self.varList.append([str(temp[i]),temp[i]])
         return
     
     def setUnknowns(self,string): ##HAY UN PROBLEMA POR ACA

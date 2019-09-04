@@ -23,7 +23,6 @@ class Logic(baseUIWidget, baseUIClass):
         self.addButton.clicked.connect(self.addEquation)
         self.clearAll()
 
-
     def setConfigurations(self):
         self.stringParser.eraseEq()
         self.stringParser.eraseUnk()

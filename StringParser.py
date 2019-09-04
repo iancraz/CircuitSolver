@@ -12,7 +12,7 @@ class stringParser:
     def getVarList(self):
         return self.varList
     
-    def decode(self,string): ##otros problemas por aca
+    def decode(self,string):
         self.expressList.append(parse_expr(string,transformations=standard_transformations + (implicit_multiplication,)))
         temp = len(self.expressList)
         temp = list(self.expressList[temp-1].free_symbols)
@@ -32,7 +32,7 @@ class stringParser:
                 self.varList.append([str(temp[i]),temp[i]])
         return
     
-    def setUnknowns(self,string): ##HAY UN PROBLEMA POR ACA
+    def setUnknowns(self,string):
         self.unkownsList = []
         temp = string.split(',')
         for i in range(0,len(temp)):

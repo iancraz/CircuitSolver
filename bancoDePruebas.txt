@@ -8,9 +8,11 @@ vo + A vm
 A - ao/(1+s/w)
 s -I*2*pi*f
 
-unk:
+var:
 im:
 A,s,I
-
 re:
 vi,vo,vx,vm,r1,r2,r3,ri,ao,w,pi,f
+
+unk:
+vi,vo,vx,A,s

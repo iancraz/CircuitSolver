@@ -39,7 +39,7 @@
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>290</y>
+      <y>310</y>
       <width>51</width>
       <height>21</height>
      </rect>
@@ -82,7 +82,7 @@
     <property name="geometry">
      <rect>
       <x>270</x>
-      <y>290</y>
+      <y>310</y>
       <width>51</width>
       <height>21</height>
      </rect>
@@ -254,7 +254,7 @@
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>170</y>
+      <y>190</y>
       <width>70</width>
       <height>17</height>
      </rect>
@@ -267,7 +267,7 @@
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>190</y>
+      <y>210</y>
       <width>70</width>
       <height>17</height>
      </rect>
@@ -293,7 +293,7 @@
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>210</y>
+      <y>230</y>
       <width>101</width>
       <height>21</height>
      </rect>
@@ -311,7 +311,7 @@
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>240</y>
+      <y>260</y>
       <width>82</width>
       <height>17</height>
      </rect>
@@ -333,7 +333,7 @@
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>260</y>
+      <y>280</y>
       <width>82</width>
       <height>17</height>
      </rect>
@@ -658,7 +658,7 @@ p, li { white-space: pre-wrap; }
      <string>=0</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="modPhaseResultTextEdit">
+   <widget class="QTextEdit" name="phaseResultTextEdit">
     <property name="geometry">
      <rect>
       <x>560</x>
@@ -672,7 +672,7 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Module or Phase Result&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Phase Result&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_13">
@@ -691,7 +691,7 @@ p, li { white-space: pre-wrap; }
      </font>
     </property>
     <property name="text">
-     <string>Module or Phase H(s)</string>
+     <string>Phase H(s)</string>
     </property>
    </widget>
    <widget class="QPushButton" name="plotButton">
@@ -720,10 +720,10 @@ p, li { white-space: pre-wrap; }
      <string>by Ian Diaz 2019</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="modPhaseChkBox">
+   <widget class="QCheckBox" name="modChkBox">
     <property name="geometry">
      <rect>
-      <x>220</x>
+      <x>240</x>
       <y>150</y>
       <width>70</width>
       <height>17</height>
@@ -909,6 +909,19 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="text">
      <string>nro</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="phaseCheckBox">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>170</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Phase</string>
     </property>
    </widget>
   </widget>

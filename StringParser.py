@@ -17,6 +17,7 @@ class stringParser:
         temp = len(self.expressList)
         temp = list(self.expressList[temp-1].free_symbols)
         for i in range(0,len(temp)):
+            check = False
             for u in range(0,len(self.varList)):
                 temp2 = self.varList[u]
                 temp2 = temp2[0]
@@ -24,8 +25,9 @@ class stringParser:
                     temp2 = self.varList[u]
                     temp2 = temp2[1]
                     self.expressList[len(self.expressList)-1] = self.expressList[len(self.expressList)-1].subs(temp[i],temp2)
-                """ elif u == (len(self.varList)-1):
-                    self.varList.append([str(temp[i]),temp[i]]) """
+                    check = True
+                elif u == (len(self.varList)-1) and check == False:
+                    self.varList.append([str(temp[i]),temp[i]])
         return
     
     def setUnknowns(self,string): ##HAY UN PROBLEMA POR ACA
@@ -34,10 +36,15 @@ class stringParser:
         for i in range(0,len(temp)):
             temp1 = parse_expr(temp[i],transformations=standard_transformations + (implicit_multiplication,))
             temp1 = list(temp1.free_symbols)[0]
+            check = False
             for u in range(0,len(self.varList)):
                 temp2 = self.varList[u]
                 if str(temp1) == temp2[0]:
                     self.unkownsList.append(temp2[1])
+                    check = True
+                elif u == (len(self.varList)-1) and check == False:
+                    self.unkownsList.append(temp1)
+
         
         return
     

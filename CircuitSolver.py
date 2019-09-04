@@ -43,7 +43,7 @@ class circuitSolver:
             for i in range(0,len(self.solution[0])):
                 temp2 = self.solution[0]
                 temp[self.unknowns[i]] = temp2[i]
-        self.solution = temp
+            self.solution = temp
         if len(self.solution) != 0:
             self.update()
         return
@@ -84,12 +84,10 @@ class circuitSolver:
         return
     
     def update(self):
-
-        #temp = self.solution[0]
         self.H = self.solution[self.unknowns[0]]/self.solution[self.unknowns[1]]
         self.H = sy.simplify(self.H)
-        #self.mod = sy.simplify(sy.sqrt(sy.re(self.H)**2+sy.im(self.H)**2))
-        #self.phase = sy.simplify(sy.tan(sy.im(self.H)/sy.re(self.H))*180/3.14195)
+        self.mod = sy.simplify(sy.sqrt(sy.re(self.H)**2+sy.im(self.H)**2))
+        self.phase = sy.simplify(sy.tan(sy.im(self.H)/sy.re(self.H))*180/3.14195)
         #self.zinp = self.solution[Vi]/self.solution[Iinp]
         #self.zinp = sy.simplify(self.zinp)
         return

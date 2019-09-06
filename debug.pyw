@@ -2,20 +2,21 @@ import StringParser as sp
 import CircuitSolver as cs
 import sympy as sy
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 from PyQt5 import uic
-from UserInterface import *
-from about import *
 import sys
 
-class Logic(QtWidgets.QMainWindow, Ui_MainWindow):
-    def __init__(self, *args, **kwargs):
-        QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
+# load ui file
+baseUIClass, baseUIWidget = uic.loadUiType("UserInterface.ui")
+
+
+# use loaded ui file in the logic class
+class Logic(baseUIWidget, baseUIClass):
+    def __init__(self, parent=None):
+        super(Logic, self).__init__(parent)
         self.setupUi(self)
         self.circuitSolver = cs.circuitSolver()
         self.stringParser = sp.stringParser()
 
-        self.actionAbout.triggered.connect(self.about)
         self.setConfigurationsButton.clicked.connect(self.setConfigurations)
         self.clearAllButton.clicked.connect(self.clearAll)
         self.goButton.clicked.connect(self.resolve)
@@ -224,14 +225,12 @@ class Logic(QtWidgets.QMainWindow, Ui_MainWindow):
         self.extraEquationsLineEdit.setText('')
         return
 
-    def about(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_About()
-        self.ui.setupUi(self.window)
-        self.window.show()
 
-if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
-    window = Logic()
-    window.show()
-    app.exec_()
+def main():
+    app = QtWidgets.QApplication(sys.argv)
+    ui = Logic(None)
+    ui.show()
+    sys.exit(app.exec_())
+
+
+main()

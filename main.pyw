@@ -3,7 +3,6 @@ import CircuitSolver as cs
 import sympy as sy
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
-from PyQt5 import uic
 from UserInterface import *
 from about import *
 import sys

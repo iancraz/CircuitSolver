@@ -7,11 +7,15 @@
     <x>0</x>
     <y>0</y>
     <width>1009</width>
-    <height>387</height>
+    <height>371</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Circuit Solver 1.0</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>resources/itba.jpg</normaloff>resources/itba.jpg</iconset>
   </property>
   <property name="animated">
    <bool>true</bool>
@@ -226,7 +230,7 @@
       <x>190</x>
       <y>120</y>
       <width>191</width>
-      <height>211</height>
+      <height>201</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -629,6 +633,13 @@ p, li { white-space: pre-wrap; }
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="Line" name="line_8">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
    <widget class="QLabel" name="mainLabel_unk">
@@ -788,6 +799,25 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_25">
+    <property name="geometry">
+     <rect>
+      <x>910</x>
+      <y>0</y>
+      <width>91</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>resources/Logo.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>

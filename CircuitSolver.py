@@ -16,7 +16,7 @@ class circuitSolver:
         self.H = None
         self.zinp = None
         self.zout = None
-        self.solution = None
+        self.solution = []
         self.Vi = sy.Symbol('Vi', real=True)
         self.Vo = sy.Symbol('Vo', real=True)
         self.Iinp = sy.Symbol('Iinp', real=True)
@@ -39,14 +39,15 @@ class circuitSolver:
 
     def solveCircuit(self):
         self.solution = sy.solve(self.equations, self.unknowns, manual=1)
-        if type(self.solution) == list:
-            temp = {}
-            for i in range(0, len(self.solution[0])):
-                temp2 = self.solution[0]
-                temp[self.unknowns[i]] = temp2[i]
-            self.solution = temp
-        if len(self.solution) != 0:
-            self.update()
+        if len(self.solution) != 0: 
+            if type(self.solution) == list:
+                temp = {}
+                for i in range(0, len(self.solution[0])):
+                    temp2 = self.solution[0]
+                    temp[self.unknowns[i]] = temp2[i]
+                self.solution = temp
+            if len(self.solution) != 0:
+                self.update()
         return
 
     def getH(self):
@@ -87,14 +88,15 @@ class circuitSolver:
         return
 
     def update(self):
-        self.H = self.solution[self.unknowns[0]] / self.solution[self.unknowns[1]]
-        self.H = sy.simplify(self.H)
-        self.mod = sy.sqrt(sy.re(self.H) ** 2 + sy.im(self.H) ** 2)
-        self.phase = sy.tan(sy.im(self.H) / sy.re(self.H)) * 180 / 3.14195
-        if self.resolveZinp:
-            self.zinp = self.solution[self.unknowns[1]] / self.solution[self.unknowns[2]]
-        if self.resolveZout:
-            self.zout = self.solution[self.unknowns[0]] / self.solution[self.unknowns[3]]
+        if len(self.solution) != 0: 
+            self.H = self.solution[self.unknowns[0]] / self.solution[self.unknowns[1]]
+            self.H = sy.simplify(self.H)
+            self.mod = sy.sqrt(sy.re(self.H) ** 2 + sy.im(self.H) ** 2)
+            self.phase = sy.atan(sy.im(self.H) / sy.re(self.H)) * 180 / 3.14195
+            if self.resolveZinp:
+                self.zinp = self.solution[self.unknowns[1]] / self.solution[self.unknowns[2]]
+            if self.resolveZout:
+                self.zout = self.solution[self.unknowns[0]] / self.solution[self.unknowns[3]]
         # self.zinp = sy.simplify(self.zinp)
         return
 
